@@ -1,22 +1,12 @@
 import React, { FC, useCallback, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchNews } from "./app/newsSlice"
-import { RootState } from "./app/store"
+import { fetchNews, NewsItem } from "./store/newsSlice"
+import { RootState } from "./store/store"
 import { LikeOutlined } from "@ant-design/icons"
-import { Tag, Card, Space, Flex } from "antd"
-
-interface NewsItem {
-  id: number
-  title: string
-  body: string
-}
+import { Tag, Card, Space } from "antd"
 
 interface PostProps {
-  post: {
-    id: number
-    title: string
-    body: string
-  }
+  post: NewsItem
 }
 
 const Post: FC<PostProps> = ({ post }) => {
@@ -24,7 +14,6 @@ const Post: FC<PostProps> = ({ post }) => {
 
   return (
     <>
-      {/*<Flex vertical>*/}
       <Space align="center">
         <Card title={post.title} bordered={true}>
           <p>{post.body}</p>
@@ -35,17 +24,14 @@ const Post: FC<PostProps> = ({ post }) => {
           </>
         </Card>
       </Space>
-      {/*</Flex>*/}
     </>
   )
 }
 
 const App: React.FC = () => {
   const dispatch = useDispatch()
-  // const news = useSelector((state) => state.news)
-  const news: NewsItem[] = useSelector((state: RootState) => state.news)
+  const newsData = useSelector((state: RootState) => state.news)
   const skip = useSelector((state: RootState) => state.skip)
-  // const [news, setNews] = useState<NewsItem[]>([])
 
   const handleScroll = useCallback(() => {
     if (
@@ -71,7 +57,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      {news.news.map((post) => (
+      {newsData.news.map((post) => (
         <Post key={post.id} post={post} />
       ))}
     </>

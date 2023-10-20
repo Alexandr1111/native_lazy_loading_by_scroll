@@ -7,9 +7,12 @@ interface NewsState {
   skip: number
 }
 
-interface NewsItem {
+export interface NewsItem {
   id: number
   title: string
+  body: string
+  reactions: number
+  tags: string[]
 }
 
 const initialState: NewsState = {
@@ -42,7 +45,6 @@ const newsSlice = createSlice({
         state.isError = false
       })
       .addCase(fetchNews.fulfilled, (state, action) => {
-        console.log(action.payload, "dsdsa2")
         state.isLoading = false
         state.news = [...state.news, ...action.payload]
         state.skip = state.skip + 10

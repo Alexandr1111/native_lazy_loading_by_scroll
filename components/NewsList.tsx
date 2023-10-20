@@ -1,7 +1,7 @@
 // import React, { useEffect } from "react";
 // import { useSelector, useDispatch } from "react-redux";
 // import { RootState } from "./store";
-// import { fetchNews } from "../src/app/newsSlice";
+// import { fetchNews } from "../src/store/newsSlice";
 //
 // const News: React.FC = () => {
 //   const dispatch = useDispatch();
